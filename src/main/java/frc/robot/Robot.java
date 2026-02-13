@@ -4,13 +4,17 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.hardware.Pigeon2;
+
 import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.utilities.LimelightHelpers;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; 
+
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -23,10 +27,19 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
   }
 
+
+  public Pigeon2 getPigeon() {
+    Pigeon2 pigeon2 = m_robotContainer.drivetrain.getPigeon2();
+    return pigeon2;
+  }
+    
  @Override
   public void robotInit() {
     SmartDashboard.putData("Field", ourfield);
-  }
+    getPigeon().setYaw(0.0);
+    }
+
+  
 
   @Override
   public void robotPeriodic() {
@@ -42,6 +55,8 @@ public class Robot extends TimedRobot {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     SmartDashboard.putString("Choice", m_autonomousCommand.toString());
     SmartDashboard.putNumber("Tag Count", myLimelightPose.tagCount);
+    //SmartDashboard.putNumber("Pigeonyaw", Rotation2d.fromDegrees(m_robotContainer.drivetrain.getPigeon2().getYaw().getValueAsDouble()).getDegrees());
+    SmartDashboard.putNumber("pigeon2 yaw", Math.floorMod((int) getPigeon().getYaw().getValueAsDouble(), 360));
   }
 
   @Override
