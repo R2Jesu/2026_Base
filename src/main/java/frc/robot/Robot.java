@@ -51,6 +51,18 @@ public class Robot extends TimedRobot {
       }
     ourfield.setRobotPose(m_robotContainer.drivetrain.getState().Pose);
 
+    //
+    //double omegaRps = Units.degreesToRotations(m_robotContainer.m_robotDrive.getTurnRate());
+    //var llMeasurement = LimelightHelpers.getBotPose_wpiBlue("limelight");
+    
+   //* if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
+     // m_robotContainer.m_robotDrive.resetOdometry(llMeasurement.pose); 
+    
+    
+
+  
+//odometry aiming and ranging: docs.limelightvision.io/docs/docs-limelight/tutorials/tutorial-aiming-and-ranging
+
     CommandScheduler.getInstance().run();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     SmartDashboard.putString("Choice", m_autonomousCommand.toString());
