@@ -56,6 +56,7 @@ public class DriveSubsystem extends TunerSwerveDrivetrain implements Subsystem {
 
     private final SwerveRequest.ApplyRobotSpeeds m_pathApplyRobotSpeeds = new SwerveRequest.ApplyRobotSpeeds();
 
+    private final Pigeon2 m_pigeon2 = getPigeon2();
     /* SysId routine for characterizing translation. This is used to find PID gains for the drive motors. */
     private final SysIdRoutine m_sysIdRoutineTranslation = new SysIdRoutine(
         new SysIdRoutine.Config(
@@ -202,7 +203,7 @@ public class DriveSubsystem extends TunerSwerveDrivetrain implements Subsystem {
     }
 
     /**
-     * Returns a command that applies the specified control request to this swerve drivetrain.
+     * Returns a command that applies the specified control request to this swerve m_robotDrive.
      *
      * @param request Function returning the request to apply
      * @return Command to run
@@ -331,4 +332,11 @@ public class DriveSubsystem extends TunerSwerveDrivetrain implements Subsystem {
     ) {
         super.addVisionMeasurement(visionRobotPoseMeters, Utils.fpgaToCurrentTime(timestampSeconds), visionMeasurementStdDevs);
     }
+    //returns the turn rate of the robot in degrees per second, used for vision odometry correction in Robot.java
+    
+    public double getTurnRate() {
+        //return getState().Speeds.omegaRadiansPerSecond * 180 / Math.PI;
+        return m_pigeon2.getAngularVelocityZWorld().getValueAsDouble();
+    }
+    
 }
