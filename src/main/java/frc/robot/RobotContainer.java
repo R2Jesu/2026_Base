@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 
 import frc.robot.generated.TunerConstants;
-import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.DriveSubsystem;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -45,7 +45,7 @@ public class RobotContainer {
 
     private final CommandXboxController joystick = new CommandXboxController(0);
 
-    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+    public final DriveSubsystem drivetrain = TunerConstants.createDrivetrain();
 
     private final SlewRateLimiter xLimiter = new SlewRateLimiter(2.0); // 3 m/s^2
     private final SlewRateLimiter yLimiter = new SlewRateLimiter(2.0);
