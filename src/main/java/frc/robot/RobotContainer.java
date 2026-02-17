@@ -53,19 +53,17 @@ public class RobotContainer {
     private final SlewRateLimiter rotLimiter = new SlewRateLimiter(Math.PI); // rad/s^2
 
     public RobotContainer() {
-        configureBindings();
         registerAutoCommands();
-
-        
-    autoChooser = AutoBuilder.buildAutoChooser();
-    SmartDashboard.putData("Auto Chooser", autoChooser);
+        autoChooser = AutoBuilder.buildAutoChooser();
+        SmartDashboard.putData("Auto Chooser", autoChooser);
+        configureBindings();
     }
 
     private void registerAutoCommands(){
 
-  NamedCommands.registerCommand("R2Jesu_AlignA", Commands.print("COMMAND NEEDED: SAVE POSITION COORDS_VARIABLE"));
-
-   
+  NamedCommands.registerCommand("ppShoot", Commands.print("Command to shoot preloaded balls"));
+  NamedCommands.registerCommand("ppHang", new SequentialCommandGroup(Commands.print("Command to hang"), Commands.waitSeconds(1), Commands.print("Command to release")));
+  
 
     
   }
@@ -109,6 +107,6 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
-        return Commands.print("No autonomous command configured");
+        return autoChooser.getSelected();
     }
 }
