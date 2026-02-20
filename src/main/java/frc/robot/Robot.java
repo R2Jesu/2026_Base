@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.utilities.LimelightHelpers;
+import frc.robot.utilities.LimelightHelpers.PoseEstimate;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -53,17 +54,11 @@ public class Robot extends TimedRobot {
         m_robotContainer.m_robotDrive.addVisionMeasurement(myLimelightPose.pose, myLimelightPose.timestampSeconds);
       }
     ourfield.setRobotPose(m_robotContainer.m_robotDrive.getState().Pose);
-
-//based on the video, we are putting in logic to reset our robot codes based on robot position
-    double omegaRps = Units.degreesToRotations(m_robotContainer.m_robotDrive.getTurnRate());
-    var llMeasurement = LimelightHelpers.getBotPose_wpiBlue("limelight");
     
-//original example
-//    if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
-//      m_robotContainer.m_robotDrive.resetOdometry(llMeasurement.pose); 
-//our revised attempt  CHRIS TONEY PLS HELP - trying to reset robot pose to the limelights pose
-//    if (llMeasurement != null && LimelightHelpers.getTargetCount("limelight") > 0 && Math.abs(omegaRps) < 2.0) {
-//      m_robotContainer.m_robotDrive.setRobotPose(llMeasurement);
+    PoseEstimate poseEstimate = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+    double distance = poseEstimate.avgTagDist; 
+
+
     
 
   
@@ -75,6 +70,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Tag Count", myLimelightPose.tagCount);
     //SmartDashboard.putNumber("Pigeonyaw", Rotation2d.fromDegrees(m_robotContainer.m_robotDrive.getPigeon2().getYaw().getValueAsDouble()).getDegrees());
     SmartDashboard.putNumber("pigeon2 yaw", Math.floorMod((int) getPigeon().getYaw().getValueAsDouble(), 360));
+    SmartDashboard.putNumber("Distance", distance);
   }
   
 
