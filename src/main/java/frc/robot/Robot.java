@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run(); 
     LimelightHelpers.PoseEstimate myLimelightPose = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
-   if (myLimelightPose.tagCount >= 2) {
+   if (myLimelightPose.tagCount >= 1) {
         m_robotContainer.m_robotDrive.setVisionMeasurementStdDevs(VecBuilder.fill(0.7, 0.7, 9999999));
         m_robotContainer.m_robotDrive.addVisionMeasurement(myLimelightPose.pose, myLimelightPose.timestampSeconds);
       }
