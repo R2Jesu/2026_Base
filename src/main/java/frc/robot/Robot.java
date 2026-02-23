@@ -40,10 +40,8 @@ public class Robot extends TimedRobot {
  @Override
   public void robotInit() {
     SmartDashboard.putData("Field", ourfield);
-    getPigeon().setYaw(0.0);
+    m_robotContainer.m_robotDrive.getPigeon2().reset();
     }
-
-  
 
   @Override
   public void robotPeriodic() {
@@ -68,7 +66,7 @@ public class Robot extends TimedRobot {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     SmartDashboard.putString("Choice", m_autonomousCommand.toString());
     SmartDashboard.putNumber("Tag Count", myLimelightPose.tagCount);
-    //SmartDashboard.putNumber("Pigeonyaw", Rotation2d.fromDegrees(m_robotContainer.m_robotDrive.getPigeon2().getYaw().getValueAsDouble()).getDegrees());
+    SmartDashboard.putNumber("Pigeonyaw", m_robotContainer.m_robotDrive.getState().RawHeading.getDegrees());
     SmartDashboard.putNumber("pigeon2 yaw", Math.floorMod((int) getPigeon().getYaw().getValueAsDouble(), 360));
     SmartDashboard.putNumber("Distance", distance);
   }

@@ -27,6 +27,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.R2Jesu_ShooterSubsystem;
+import frc.robot.commands.ShooterModeShootWithLimelight;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -46,10 +48,11 @@ public class RobotContainer {
     private final CommandXboxController joystick = new CommandXboxController(0);
 
     public final DriveSubsystem m_robotDrive = TunerConstants.createDrivetrain();
+    public final R2Jesu_ShooterSubsystem m_shooterSubsystem = new R2Jesu_ShooterSubsystem();
     // need to understand why drivetain doesnt = new DriveSubsystem();
 
-    private final SlewRateLimiter xLimiter = new SlewRateLimiter(2.0); // 3 m/s^2
-    private final SlewRateLimiter yLimiter = new SlewRateLimiter(2.0);
+    private final SlewRateLimiter xLimiter = new SlewRateLimiter(5.0); // 3 m/s^2
+    private final SlewRateLimiter yLimiter = new SlewRateLimiter(5.0);
     private final SlewRateLimiter rotLimiter = new SlewRateLimiter(Math.PI); // rad/s^2
 
     public RobotContainer() {
@@ -104,6 +107,10 @@ public class RobotContainer {
         joystick.leftBumper().onTrue(m_robotDrive.runOnce(() -> m_robotDrive.seedFieldCentric()));
 
         m_robotDrive.registerTelemetry(logger::telemeterize);
+
+        //Driver Buttons and such
+        joystick.rightTrigger().whileTrue(new ShooterModeShootWithLimelight(m_shooterSubsystem, m_robotDrive,
+            joystick));
     }
 
     public Command getAutonomousCommand() {
