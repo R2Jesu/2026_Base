@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0489102564102577,
-        "y": 3.8896474358974364
+        "x": 0.9210157194679565,
+        "y": 5.9756408706166875
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.0489102564102577,
-        "y": 3.8896474358974364
+        "x": 1.9210157194679574,
+        "y": 5.9756408706166875
       },
       "isLocked": false,
-      "linkedName": "CNTR_end"
+      "linkedName": "E_col_depot"
     },
     {
       "anchor": {
-        "x": 2.1427111111111112,
-        "y": 2.2411555555555562
+        "x": 2.8510519951632407,
+        "y": 5.424201934703749
       },
       "prevControl": {
-        "x": 1.1427111111111112,
-        "y": 2.2411555555555562
+        "x": 1.8510519951632407,
+        "y": 5.424201934703749
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "E_shoot_2_depot"
     }
   ],
   "rotationTargets": [],
@@ -33,10 +33,10 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.12,
-    "maxAcceleration": 1.8,
-    "maxAngularVelocity": 45.0,
-    "maxAngularAcceleration": 75.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
