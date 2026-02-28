@@ -10,6 +10,8 @@ import com.ctre.phoenix6.hardware.Pigeon2;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -26,7 +28,7 @@ public class Robot extends TimedRobot {
   private final Field2d ourfield = new Field2d();
 
   private final RobotContainer m_robotContainer;
-double omegaRPS; 
+  double omegaRPS; 
 
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -44,6 +46,26 @@ double omegaRPS;
     SmartDashboard.putData("Field", ourfield);
     m_robotContainer.m_robotDrive.getPigeon2().reset();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    SmartDashboard.putData("Swerve Drive", new Sendable() {
+      @Override
+      public void initSendable(SendableBuilder builder) {
+      builder.setSmartDashboardType("SwerveDrive");
+  
+      builder.addDoubleProperty("Front Left Angle", () -> m_robotContainer.m_robotDrive.getState().ModuleStates[0].angle.getRadians(), null);
+      builder.addDoubleProperty("Front Left Velocity", () -> m_robotContainer.m_robotDrive.getState().ModuleStates[0].speedMetersPerSecond, null);
+  
+      builder.addDoubleProperty("Front Right Angle", () -> m_robotContainer.m_robotDrive.getState().ModuleStates[1].angle.getRadians(), null);
+      builder.addDoubleProperty("Front Right Velocity", () -> m_robotContainer.m_robotDrive.getState().ModuleStates[1].speedMetersPerSecond, null);
+  
+      builder.addDoubleProperty("Back Left Angle", () -> m_robotContainer.m_robotDrive.getState().ModuleStates[2].angle.getRadians(), null);
+      builder.addDoubleProperty("Back Left Velocity", () -> m_robotContainer.m_robotDrive.getState().ModuleStates[2].speedMetersPerSecond, null);
+  
+      builder.addDoubleProperty("Back Right Angle", () -> m_robotContainer.m_robotDrive.getState().ModuleStates[3].angle.getRadians(), null);
+      builder.addDoubleProperty("Back Right Velocity", () -> m_robotContainer.m_robotDrive.getState().ModuleStates[3].speedMetersPerSecond, null);
+  
+      builder.addDoubleProperty("Robot Angle", () -> m_robotContainer.m_robotDrive.getState().Pose.getRotation().getRadians(), null);
+      }
+    });
     }
 
   @Override
@@ -61,8 +83,7 @@ double omegaRPS;
     double distance = poseEstimate.avgTagDist; 
 //odometry aiming and ranging: docs.limelightvision.io/docs/docs-limelight/tutorials/tutorial-aiming-and-ranging
 
-
-    SmartDashboard.putString("Choice", m_autonomousCommand.toString());
+/*     SmartDashboard.putString("Choice", m_autonomousCommand.toString());
     SmartDashboard.putNumber("Tag Count", myLimelightPose.tagCount);
     SmartDashboard.putNumber("Pigeonyaw", m_robotContainer.m_robotDrive.getState().RawHeading.getDegrees());
     SmartDashboard.putNumber("pigeon2 yaw", Math.floorMod((int) getPigeon().getYaw().getValueAsDouble(), 360));
@@ -73,7 +94,7 @@ double omegaRPS;
     SmartDashboard.putNumber("Robotrotation", m_robotContainer.m_robotDrive.getState().Pose.getRotation().getDegrees());
     SmartDashboard.putNumber("Limelightx", poseEstimate.pose.getX());
     SmartDashboard.putNumber("Limelighty", poseEstimate.pose.getY());
-    SmartDashboard.putNumber("Limelightrotation", poseEstimate.pose.getRotation().getDegrees());
+    SmartDashboard.putNumber("Limelightrotation", poseEstimate.pose.getRotation().getDegrees()); */
   }
   
 
