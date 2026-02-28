@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.6182526564344748,
-        "y": 0.6905962219598565
+        "x": 1.0832309331492926,
+        "y": 1.1315051394472904
       },
       "isLocked": false,
       "linkedName": "E_HP_col"
@@ -20,8 +20,8 @@
         "y": 1.8502656434474614
       },
       "prevControl": {
-        "x": 0.9435891381345929,
-        "y": 1.8502656434474616
+        "x": 1.76799139992484,
+        "y": 1.6723178018319502
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.12,
+    "maxVelocity": 1.12,
     "maxAcceleration": 1.8,
     "maxAngularVelocity": 45.0,
     "maxAngularAcceleration": 75.0,

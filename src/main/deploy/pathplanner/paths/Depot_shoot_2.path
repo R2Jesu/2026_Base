@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9210157194679574,
-        "y": 5.9756408706166875
+        "x": 1.7343759363807632,
+        "y": 5.778318066146619
       },
       "isLocked": false,
       "linkedName": "E_col_depot"
@@ -20,8 +20,8 @@
         "y": 5.471352313167261
       },
       "prevControl": {
-        "x": 1.8581257413997632,
-        "y": 5.471352313167261
+        "x": 2.188876869434467,
+        "y": 5.635358370519639
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.12,
+    "maxVelocity": 1.12,
     "maxAcceleration": 1.8,
     "maxAngularVelocity": 45.0,
     "maxAngularAcceleration": 75.0,

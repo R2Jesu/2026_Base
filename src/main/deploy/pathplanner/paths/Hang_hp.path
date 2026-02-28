@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.943589138134593,
-        "y": 1.8502656434474614
+        "x": 2.2005092473181636,
+        "y": 1.7781781207669112
       },
       "isLocked": false,
       "linkedName": "E_HP_shoot2"
     },
     {
       "anchor": {
-        "x": 1.6664035087719293,
-        "y": 3.9753289473684212
+        "x": 1.5777817319098464,
+        "y": 3.1904033214709373
       },
       "prevControl": {
-        "x": 0.6664035087719293,
-        "y": 3.9753289473684212
+        "x": 1.4197372118542548,
+        "y": 2.9966975402448788
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.12,
+    "maxVelocity": 1.12,
     "maxAcceleration": 1.8,
     "maxAngularVelocity": 45.0,
     "maxAngularAcceleration": 75.0,

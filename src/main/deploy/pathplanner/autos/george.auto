@@ -7,7 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "HP_shoot"
+            "pathName": "New Path"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "go_balls_mid"
           }
         }
       ]
