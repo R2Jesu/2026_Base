@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.4620175438596483,
-        "y": 4.07798578199052
+        "x": 1.622506502284823,
+        "y": 3.744760642782104
       },
       "isLocked": false,
       "linkedName": "E_mid_shoot"
     },
     {
       "anchor": {
-        "x": 1.457554824561403,
-        "y": 3.826151315789473
+        "x": 1.534744958481614,
+        "y": 3.728362989323844
       },
       "prevControl": {
-        "x": 0.45755482456140295,
-        "y": 3.826151315789473
+        "x": 1.9050527712267469,
+        "y": 3.882291084996122
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.12,
+    "maxVelocity": 1.12,
     "maxAcceleration": 1.8,
     "maxAngularVelocity": 45.0,
     "maxAngularAcceleration": 75.0,

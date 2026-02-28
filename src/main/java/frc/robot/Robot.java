@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.hardware.Pigeon2;
 
 import edu.wpi.first.math.VecBuilder;
@@ -25,6 +26,7 @@ public class Robot extends TimedRobot {
   private final Field2d ourfield = new Field2d();
 
   private final RobotContainer m_robotContainer;
+double omegaRPS; 
 
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -46,13 +48,15 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run(); 
-    LimelightHelpers.PoseEstimate myLimelightPose = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
-   if (myLimelightPose.tagCount >= 2) {
-        m_robotContainer.m_robotDrive.setVisionMeasurementStdDevs(VecBuilder.fill(0.7, 0.7, 9999999));
+    LimelightHelpers.SetRobotOrientation(Constants.kLimelightName, m_robotContainer.m_robotDrive.getState().RawHeading.getDegrees(), kDefaultPeriod, kDefaultPeriod, kDefaultPeriod, kDefaultPeriod, kDefaultPeriod);
+    LimelightHelpers.PoseEstimate myLimelightPose = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
+   if (myLimelightPose.tagCount >= 1 && myLimelightPose != null) {
+        m_robotContainer.m_robotDrive.setVisionMeasurementStdDevs(VecBuilder.fill(0.9, 0.9, 99.0));
         m_robotContainer.m_robotDrive.addVisionMeasurement(myLimelightPose.pose, myLimelightPose.timestampSeconds);
+        //m_robotContainer.m_robotDrive.addVisionMeasurement(myLimelightPose.pose, Utils.fpgaToCurrentTime(myLimelightPose.timestampSeconds));
       }
     ourfield.setRobotPose(m_robotContainer.m_robotDrive.getState().Pose);
-    
+    omegaRPS = Units.degreesToRotations(m_robotContainer.m_robotDrive.getTurnRate());
     PoseEstimate poseEstimate = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
     double distance = poseEstimate.avgTagDist; 
 
@@ -69,6 +73,13 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Pigeonyaw", m_robotContainer.m_robotDrive.getState().RawHeading.getDegrees());
     SmartDashboard.putNumber("pigeon2 yaw", Math.floorMod((int) getPigeon().getYaw().getValueAsDouble(), 360));
     SmartDashboard.putNumber("Distance", distance);
+    SmartDashboard.putNumber("omegaRPS", Math.abs(omegaRPS));
+    SmartDashboard.putNumber("Robotx", m_robotContainer.m_robotDrive.getState().Pose.getX());
+    SmartDashboard.putNumber("Roboty", m_robotContainer.m_robotDrive.getState().Pose.getY());
+    SmartDashboard.putNumber("Robotrotation", m_robotContainer.m_robotDrive.getState().Pose.getRotation().getDegrees());
+    SmartDashboard.putNumber("Limelightx", poseEstimate.pose.getX());
+    SmartDashboard.putNumber("Limelighty", poseEstimate.pose.getY());
+    SmartDashboard.putNumber("Limelightrotation", poseEstimate.pose.getRotation().getDegrees());
   }
   
 

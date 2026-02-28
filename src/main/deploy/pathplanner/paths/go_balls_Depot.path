@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.2432236842105255,
-        "y": 6.033980263157895
+        "x": 1.489397012599546,
+        "y": 6.003445771419865
       },
       "isLocked": false,
       "linkedName": "E_shoot_depot"
@@ -20,8 +20,8 @@
         "y": 5.9756408706166875
       },
       "prevControl": {
-        "x": 1.4210157194679565,
-        "y": 5.9756408706166875
+        "x": 1.644133145745434,
+        "y": 6.007587934488704
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.12,
+    "maxVelocity": 1.12,
     "maxAcceleration": 1.8,
     "maxAngularVelocity": 45.0,
     "maxAngularAcceleration": 75.0,
