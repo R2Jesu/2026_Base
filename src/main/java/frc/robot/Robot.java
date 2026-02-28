@@ -43,31 +43,25 @@ double omegaRPS;
   public void robotInit() {
     SmartDashboard.putData("Field", ourfield);
     m_robotContainer.m_robotDrive.getPigeon2().reset();
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run(); 
-    LimelightHelpers.SetRobotOrientation(Constants.kLimelightName, m_robotContainer.m_robotDrive.getState().RawHeading.getDegrees(), kDefaultPeriod, kDefaultPeriod, kDefaultPeriod, kDefaultPeriod, kDefaultPeriod);
+    LimelightHelpers.SetRobotOrientation(Constants.kLimelightName, m_robotContainer.m_robotDrive.getState().RawHeading.getDegrees(), 0, 0, 0, 0, 0);
     LimelightHelpers.PoseEstimate myLimelightPose = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
-   if (myLimelightPose.tagCount >= 1 && myLimelightPose != null) {
-        m_robotContainer.m_robotDrive.setVisionMeasurementStdDevs(VecBuilder.fill(0.9, 0.9, 99.0));
+   if (myLimelightPose != null && myLimelightPose.tagCount >= 1 && myLimelightPose.avgTagDist < 6.0 && myLimelightPose.tagSpan > 0.1) {
+        m_robotContainer.m_robotDrive.setVisionMeasurementStdDevs(VecBuilder.fill(0.9, 0.9, 0.9));
         m_robotContainer.m_robotDrive.addVisionMeasurement(myLimelightPose.pose, myLimelightPose.timestampSeconds);
-        //m_robotContainer.m_robotDrive.addVisionMeasurement(myLimelightPose.pose, Utils.fpgaToCurrentTime(myLimelightPose.timestampSeconds));
       }
     ourfield.setRobotPose(m_robotContainer.m_robotDrive.getState().Pose);
     omegaRPS = Units.degreesToRotations(m_robotContainer.m_robotDrive.getTurnRate());
-    PoseEstimate poseEstimate = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+    PoseEstimate poseEstimate = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
     double distance = poseEstimate.avgTagDist; 
-
-
-    
-
-  
 //odometry aiming and ranging: docs.limelightvision.io/docs/docs-limelight/tutorials/tutorial-aiming-and-ranging
 
-    CommandScheduler.getInstance().run();
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
     SmartDashboard.putString("Choice", m_autonomousCommand.toString());
     SmartDashboard.putNumber("Tag Count", myLimelightPose.tagCount);
     SmartDashboard.putNumber("Pigeonyaw", m_robotContainer.m_robotDrive.getState().RawHeading.getDegrees());
