@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import static edu.wpi.first.units.Units.*;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import com.ctre.phoenix6.SignalLogger;
@@ -138,9 +139,7 @@ public class DriveSubsystem extends TunerSwerveDrivetrain implements Subsystem {
             startSimThread();
         }
         configureAutoBuilder();
-        
 
-        
     
     }
 
@@ -202,7 +201,7 @@ public class DriveSubsystem extends TunerSwerveDrivetrain implements Subsystem {
         configureAutoBuilder();
     }
 
-    /**
+    /** note this section was added after the pathplanner example
      * Returns a command that applies the specified control request to this swerve m_robotDrive.
      *
      * @param request Function returning the request to apply
@@ -212,7 +211,7 @@ public class DriveSubsystem extends TunerSwerveDrivetrain implements Subsystem {
         return run(() -> this.setControl(requestSupplier.get()));
     }
 
-    /**
+    /** note this section was added after the pathplanner example
      * Runs the SysId Quasistatic test in the given direction for the routine
      * specified by {@link #m_sysIdRoutineToApply}.
      *
@@ -223,7 +222,7 @@ public class DriveSubsystem extends TunerSwerveDrivetrain implements Subsystem {
         return m_sysIdRoutineToApply.quasistatic(direction);
     }
 
-    /**
+    /** note this section was added after the pathplanner example
      * Runs the SysId Dynamic test in the given direction for the routine
      * specified by {@link #m_sysIdRoutineToApply}.
      *
@@ -234,7 +233,7 @@ public class DriveSubsystem extends TunerSwerveDrivetrain implements Subsystem {
         return m_sysIdRoutineToApply.dynamic(direction);
     }
 
-       private void configureAutoBuilder() {
+    private void configureAutoBuilder() {
         try {
             var config = RobotConfig.fromGUISettings();
             AutoBuilder.configure(
@@ -249,9 +248,9 @@ public class DriveSubsystem extends TunerSwerveDrivetrain implements Subsystem {
                 ),
                 new PPHolonomicDriveController(
                     // PID constants for translation
-                    new PIDConstants(10, 0, 0),
+                    new PIDConstants(10, 0, 0), // TEST dropping kP down to 1
                     // PID constants for rotation
-                    new PIDConstants(7, 0, 0)
+                    new PIDConstants(7, 0, 0) // TEST dropping kP down to 1
                 ),
                 config,
                 // Assume the path needs to be flipped for Red vs Blue, this is normally the case
@@ -338,5 +337,15 @@ public class DriveSubsystem extends TunerSwerveDrivetrain implements Subsystem {
         //return getState().Speeds.omegaRadiansPerSecond * 180 / Math.PI;
         return m_pigeon2.getAngularVelocityZWorld().getValueAsDouble();
     }
-    
+/**  MEE copied from CTRE Phoenix-6 pathplanner example
+     * Return the pose at a given timestamp, if the buffer is not empty.
+     *
+     * @param timestampSeconds The timestamp of the pose in seconds.
+     * @return The pose at the given timestamp (or Optional.empty() if the buffer is empty).
+     
+    @Override
+    public Optional<Pose2d> samplePoseAt(double timestampSeconds) {
+        return super.samplePoseAt(Utils.fpgaToCurrentTime(timestampSeconds));
+    }
+*/    
 }

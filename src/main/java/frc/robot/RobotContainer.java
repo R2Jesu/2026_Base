@@ -22,6 +22,8 @@ import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation;
+// MEE according to Phoenix6 examples this is needed for  warning on pathplanner warmup
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 
 
@@ -31,13 +33,13 @@ import frc.robot.subsystems.R2Jesu_ShooterSubsystem;
 import frc.robot.commands.ShooterModeShootWithLimelight;
 
 public class RobotContainer {
-    private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
-    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
+    private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed set to 1 initially - press fn f12 to see setting
+    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity - change to rotate faster
 
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
             .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
-            .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
+            .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors - can change to velocity 
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
     private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
 
@@ -60,6 +62,10 @@ public class RobotContainer {
         autoChooser = AutoBuilder.buildAutoChooser();
         SmartDashboard.putData("Auto Chooser", autoChooser);
         configureBindings();
+        
+        // MEE ADDED Warmup PathPlanner to avoid Java pauses
+        CommandScheduler.getInstance().schedule(FollowPathCommand.warmupCommand());
+
     }
 
     private void registerAutoCommands(){
@@ -90,7 +96,7 @@ public class RobotContainer {
         RobotModeTriggers.disabled().whileTrue(
             m_robotDrive.applyRequest(() -> idle).ignoringDisable(true)
         );
-
+        // MEE brake locks wheels into an X-stance to lock it into a position
         joystick.a().whileTrue(m_robotDrive.applyRequest(() -> brake));
         joystick.b().whileTrue(m_robotDrive.applyRequest(() ->
             point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))
@@ -103,12 +109,12 @@ public class RobotContainer {
         joystick.start().and(joystick.y()).whileTrue(m_robotDrive.sysIdQuasistatic(Direction.kForward));
         joystick.start().and(joystick.x()).whileTrue(m_robotDrive.sysIdQuasistatic(Direction.kReverse));
 
-        // reset the field-centric heading on left bumper press
+        // MEE reset the field-centric heading on left bumper press, redefines what is forward TEST ME
         joystick.leftBumper().onTrue(m_robotDrive.runOnce(() -> m_robotDrive.seedFieldCentric()));
 
         m_robotDrive.registerTelemetry(logger::telemeterize);
 
-        //Driver Buttons and such
+        //R2JESU Driver Buttons and such
         joystick.rightTrigger().whileTrue(new ShooterModeShootWithLimelight(m_shooterSubsystem, m_robotDrive,
             joystick));
     }
