@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.FollowPathCommand;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -72,7 +74,10 @@ public class RobotContainer {
 
   NamedCommands.registerCommand("ppShoot", Commands.print("Command to shoot preloaded balls"));
   NamedCommands.registerCommand("ppHang", new SequentialCommandGroup(Commands.print("Command to hang"), Commands.waitSeconds(1), Commands.print("Command to release")));
-  
+  NamedCommands.registerCommand("score", Commands.print("Command to shoot preloaded balls"));
+  NamedCommands.registerCommand("hang", new SequentialCommandGroup(Commands.print("Raise arm"), Commands.waitSeconds(1), Commands.print("Drive forward x amount of seconds"), Commands.waitSeconds(1), Commands.print("Pull robot up"), Commands.waitSeconds(5), Commands.print("Release")));
+  NamedCommands.registerCommand("intake", new SequentialCommandGroup(Commands.print("Pull down intake"), Commands.waitSeconds(1), Commands.print("Drive forward for x seconds")));
+  NamedCommands.registerCommand("throw", Commands.print("Command to shoot preloaded balls x meters"));
 
     
   }

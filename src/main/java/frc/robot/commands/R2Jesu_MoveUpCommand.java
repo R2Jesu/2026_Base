@@ -6,22 +6,22 @@
 package frc.robot.commands;
 
 
-import frc.robot.subsystems.SwerveSubsystem; //replace with the subsytem(s) needed for your command
+import frc.robot.subsystems.R2Jesu_ClimberSubsystem; //replace with the subsytem(s) needed for your command
 import edu.wpi.first.wpilibj2.command.Command;
 
 
 /** An example command that uses an example subsystem. */
-public class alignCommand extends Command {
+public class R2Jesu_MoveUpCommand extends Command {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-    private final SwerveSubsystem m_subsystem;
-// alignCommand aligns the robot with the apriltag.
+    private final R2Jesu_ClimberSubsystem m_subsystem;
+// Retracts the robot's arm.
 
     /**
      * Creates a new ExampleCommand.
      *
      * @param subsystem The subsystem used by this command.
      */
-    public alignCommand(SwerveSubsystem subsystem) {
+    public R2Jesu_MoveUpCommand(R2Jesu_ClimberSubsystem subsystem) {
         m_subsystem = subsystem;
         // Use addRequirements() here to declare subsystem dependencies for each subsytem used
         addRequirements(subsystem);

@@ -6,22 +6,22 @@
 package frc.robot.commands;
 
 
-import frc.robot.subsystems.SwerveSubsystem; //replace with the subsytem(s) needed for your command
+import frc.robot.subsystems.R2Jesu_SMotorSubsystem; //replace with the subsytem(s) needed for your command
 import edu.wpi.first.wpilibj2.command.Command;
 
 
 /** An example command that uses an example subsystem. */
-public class driveCommand extends Command {
+public class R2Jesu_ThrowCommand extends Command {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-    private final SwerveSubsystem m_subsystem;
-// driveCommand makes sure the robot is both rotating and moving when called.
+    private final R2Jesu_SMotorSubsystem m_subsystem;
+// Throws balls farther up or down the field.
 
     /**
      * Creates a new ExampleCommand.
      *
      * @param subsystem The subsystem used by this command.
      */
-    public driveCommand(SwerveSubsystem subsystem) {
+    public R2Jesu_ThrowCommand(R2Jesu_SMotorSubsystem subsystem) {
         m_subsystem = subsystem;
         // Use addRequirements() here to declare subsystem dependencies for each subsytem used
         addRequirements(subsystem);

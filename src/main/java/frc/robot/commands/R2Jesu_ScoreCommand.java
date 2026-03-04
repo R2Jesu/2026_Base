@@ -6,22 +6,22 @@
 package frc.robot.commands;
 
 
-import frc.robot.subsystems.IntakeSubsystem; //replace with the subsytem(s) needed for your command
+import frc.robot.subsystems.R2Jesu_SMotorSubsystem; //replace with the subsytem(s) needed for your command
 import edu.wpi.first.wpilibj2.command.Command;
 
 
 /** An example command that uses an example subsystem. */
-public class intakeinCommand extends Command {
+public class R2Jesu_ScoreCommand extends Command {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-    private final IntakeSubsystem m_subsystem;
-// rotates the intake's wheels away from the robot.
+    private final R2Jesu_SMotorSubsystem m_subsystem;
+// Shoots balls into scoring hoop.
 
     /**
      * Creates a new ExampleCommand.
      *
      * @param subsystem The subsystem used by this command.
      */
-    public intakeinCommand(IntakeSubsystem subsystem) {
+    public R2Jesu_ScoreCommand(R2Jesu_SMotorSubsystem subsystem) {
         m_subsystem = subsystem;
         // Use addRequirements() here to declare subsystem dependencies for each subsytem used
         addRequirements(subsystem);
