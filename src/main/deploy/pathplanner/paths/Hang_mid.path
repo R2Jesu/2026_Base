@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.622506502284823,
-        "y": 3.744760642782104
+        "x": 2.309904551273051,
+        "y": 3.769089663432523
       },
       "isLocked": false,
       "linkedName": "E_mid_shoot"
     },
     {
       "anchor": {
-        "x": 1.534744958481614,
-        "y": 3.728362989323844
+        "x": 1.8790391459074738,
+        "y": 2.803072360616844
       },
       "prevControl": {
-        "x": 1.9050527712267469,
-        "y": 3.882291084996122
+        "x": 2.040387422141253,
+        "y": 2.994035010777518
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "E_shoot_mid"
+      "linkedName": "E_Hang_Mid"
     }
   ],
   "rotationTargets": [],
