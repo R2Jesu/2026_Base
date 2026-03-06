@@ -32,6 +32,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.R2Jesu_ShooterSubsystem;
+import frc.robot.commands.R2Jesu_AlignHangCommand;
 import frc.robot.commands.ShooterModeShootWithLimelight;
 
 public class RobotContainer {
@@ -101,19 +102,20 @@ public class RobotContainer {
         RobotModeTriggers.disabled().whileTrue(
             m_robotDrive.applyRequest(() -> idle).ignoringDisable(true)
         );
+        
         // MEE brake locks wheels into an X-stance to lock it into a position
-        joystick.a().whileTrue(m_robotDrive.applyRequest(() -> brake));
-        joystick.b().whileTrue(m_robotDrive.applyRequest(() ->
-            point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))
-        ));
+        //joystick.a().whileTrue(m_robotDrive.applyRequest(() -> brake));
+        //joystick.b().whileTrue(m_robotDrive.applyRequest(() ->
+          //  point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))
+       // ));
 
         // Run SysId routines when holding back/start and X/Y.
         // Note that each routine should be run exactly once in a single log.
-        joystick.back().and(joystick.y()).whileTrue(m_robotDrive.sysIdDynamic(Direction.kForward));
+        /* joystick.back().and(joystick.y()).whileTrue(m_robotDrive.sysIdDynamic(Direction.kForward));
         joystick.back().and(joystick.x()).whileTrue(m_robotDrive.sysIdDynamic(Direction.kReverse));
         joystick.start().and(joystick.y()).whileTrue(m_robotDrive.sysIdQuasistatic(Direction.kForward));
         joystick.start().and(joystick.x()).whileTrue(m_robotDrive.sysIdQuasistatic(Direction.kReverse));
-
+        */
         // MEE reset the field-centric heading on left bumper press, redefines what is forward TEST ME
         joystick.leftBumper().onTrue(m_robotDrive.runOnce(() -> m_robotDrive.seedFieldCentric()));
 
@@ -122,6 +124,9 @@ public class RobotContainer {
         //R2JESU Driver Buttons and such
         joystick.rightTrigger().whileTrue(new ShooterModeShootWithLimelight(m_shooterSubsystem, m_robotDrive,
             joystick));
+
+        joystick.button(2).whileTrue(new R2Jesu_AlignHangCommand(m_robotDrive, false));
+
     }
 
     public Command getAutonomousCommand() {
