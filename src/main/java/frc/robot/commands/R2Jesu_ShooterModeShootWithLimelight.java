@@ -25,7 +25,7 @@ import static edu.wpi.first.units.Units.*;
 /**
 * Aims with limelight
 */
-public class ShooterModeShootWithLimelight extends Command {
+public class R2Jesu_ShooterModeShootWithLimelight extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   
   private final R2Jesu_ShooterSubsystem m_shooterSubsystem;
@@ -67,10 +67,9 @@ public class ShooterModeShootWithLimelight extends Command {
   private int m_debounceLimit = 0;
   private double m_limeLightToAprilTagVerticalDistance = (Constants.kAprilTagHeight - Constants.kLimelightHeight);
   private double m_verticalAngleToAprilTag = 0;
-  private double m_kP = 0.007;
   private CommandXboxController m_joystick;
 
-  PIDController pid = new PIDController(m_kP, 0.00, 0.00);
+  PIDController pid = new PIDController(.01, 0.00, 0.00);
 
   /**
    * Constructs an instance of the aim with limelight command.
@@ -81,7 +80,7 @@ public class ShooterModeShootWithLimelight extends Command {
    * @param drivetrain An instance of the drivetrain subsystem.
    * Required.
    */
-  public ShooterModeShootWithLimelight(R2Jesu_ShooterSubsystem shooterSubsystem, DriveSubsystem drivetrain,
+  public R2Jesu_ShooterModeShootWithLimelight(R2Jesu_ShooterSubsystem shooterSubsystem, DriveSubsystem drivetrain,
     CommandXboxController theJoystick) {
     m_shooterSubsystem = shooterSubsystem;
     m_drivetrain = drivetrain;
@@ -108,6 +107,8 @@ public class ShooterModeShootWithLimelight extends Command {
     m_debounceLimit = 10;
   
     m_isFinished = false;
+
+    LimelightHelpers.SetIMUAssistAlpha(Constants.kLimelightName, .01);
 
   }
 
@@ -148,6 +149,7 @@ public class ShooterModeShootWithLimelight extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    LimelightHelpers.SetIMUAssistAlpha(Constants.kLimelightName, .001);
     return m_isFinished;
   }
 }
