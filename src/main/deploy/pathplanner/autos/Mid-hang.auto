@@ -13,7 +13,7 @@
         {
           "type": "named",
           "data": {
-            "name": "shoot"
+            "name": "score "
           }
         },
         {
@@ -38,6 +38,12 @@
           "type": "named",
           "data": {
             "name": "intake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "throw"
           }
         }
       ]

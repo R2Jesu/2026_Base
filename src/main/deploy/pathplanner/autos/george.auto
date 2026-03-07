@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "New Path"
+            "pathName": "Test_Path"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "go_balls_mid"
+            "name": "intake"
           }
         }
       ]
