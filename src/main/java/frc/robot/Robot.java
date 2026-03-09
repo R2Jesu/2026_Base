@@ -105,7 +105,7 @@ public class Robot extends TimedRobot {
     //odometry aiming and ranging: docs.limelightvision.io/docs/docs-limelight/tutorials/tutorial-aiming-and-ranging
 
     SmartDashboard.putString("Choice", m_autonomousCommand.toString());
-    SmartDashboard.putNumber("Tag Count", myLimelightPose.tagCount);
+    //SmartDashboard.putNumber("Tag Count", myLimelightPose.tagCount);
     //SmartDashboard.putNumber("Pigeonyaw", m_robotContainer.m_robotDrive.getState().RawHeading.getDegrees());
     SmartDashboard.putNumber("pigeon2 yaw", Math.floorMod((int) getPigeon().getYaw().getValueAsDouble(), 360));
     //SmartDashboard.putNumber("Distance", distance);
