@@ -6,14 +6,14 @@
 package frc.robot.commands;
 
 
-import frc.robot.subsystems.R2Jesu_SMotorSubsystem; //replace with the subsytem(s) needed for your command
+import frc.robot.subsystems.R2Jesu_ShooterSubsystem; //replace with the subsytem(s) needed for your command
 import edu.wpi.first.wpilibj2.command.Command;
 
 
 /** An example command that uses an example subsystem. */
 public class R2Jesu_ThrowCommand extends Command {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-    private final R2Jesu_SMotorSubsystem m_subsystem;
+    private final R2Jesu_ShooterSubsystem m_subsystem;
 // Throws balls farther up or down the field.
 
     /**
@@ -21,7 +21,7 @@ public class R2Jesu_ThrowCommand extends Command {
      *
      * @param subsystem The subsystem used by this command.
      */
-    public R2Jesu_ThrowCommand(R2Jesu_SMotorSubsystem subsystem) {
+    public R2Jesu_ThrowCommand(R2Jesu_ShooterSubsystem subsystem) {
         m_subsystem = subsystem;
         // Use addRequirements() here to declare subsystem dependencies for each subsytem used
         addRequirements(subsystem);

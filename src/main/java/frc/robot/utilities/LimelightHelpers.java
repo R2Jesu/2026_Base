@@ -1485,6 +1485,16 @@ public class LimelightHelpers {
     }
 
     /**
+     * Configures the complementary filter alpha value for IMU Assist Modes (Modes 3 and 4)
+     * 
+     * @param limelightName Name/identifier of the Limelight
+     * @param alpha Defaults to .001. Higher values will cause the internal IMU to converge onto the assist source more rapidly.
+     */
+    public static void SetIMUAssistAlpha(String limelightName, double alpha) {
+        setLimelightNTDouble(limelightName, "imuassistalpha_set", alpha);
+    }
+
+    /**
      * Sets the 3D point-of-interest offset for the current fiducial pipeline. 
      * https://docs.limelightvision.io/docs/docs-limelight/pipeline-apriltag/apriltag-3d#point-of-interest-tracking
      *

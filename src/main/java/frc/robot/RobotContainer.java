@@ -6,6 +6,8 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 
+import java.util.function.BooleanSupplier;
+
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
@@ -13,6 +15,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
@@ -20,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.FollowPathCommand;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,8 +36,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.R2Jesu_ShooterSubsystem;
-import frc.robot.commands.R2Jesu_AlignHangCommand;
-import frc.robot.commands.ShooterModeShootWithLimelight;
+import frc.robot.commands.R2Jesu_ShooterModeShootWithLimelight;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed set to 1 initially - press fn f12 to see setting
@@ -122,10 +125,16 @@ public class RobotContainer {
         m_robotDrive.registerTelemetry(logger::telemeterize);
 
         //R2JESU Driver Buttons and such
-        joystick.rightTrigger().whileTrue(new ShooterModeShootWithLimelight(m_shooterSubsystem, m_robotDrive,
+        joystick.rightTrigger().whileTrue(new R2Jesu_ShooterModeShootWithLimelight(m_shooterSubsystem, m_robotDrive,
             joystick));
 
-        joystick.button(2).whileTrue(new R2Jesu_AlignHangCommand(m_robotDrive, false));
+        joystick.button(1).onTrue(
+            new ConditionalCommand(
+            AutoBuilder.pathfindToPose(Constants.kLeftHang, Constants.teleopConstraints),
+            AutoBuilder.pathfindToPose(Constants.kRightHang, Constants.teleopConstraints),
+            () -> m_robotDrive.getState().Pose.getY() < 2.94
+            )
+        );
 
     }
 
