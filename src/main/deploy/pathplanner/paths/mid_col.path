@@ -1,0 +1,59 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 8.151789099520695,
+        "y": 7.140722748809792
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 8.33447867298041,
+        "y": 8.140142180089413
+      },
+      "isLocked": false,
+      "linkedName": "E_go_balls"
+    },
+    {
+      "anchor": {
+        "x": 7.721931279615481,
+        "y": 0.6391232227434409
+      },
+      "prevControl": {
+        "x": 7.324312796197784,
+        "y": -0.6719431279728338
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.7335701598579109,
+      "rotationDegrees": -90.80685979656178
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 2.12,
+    "maxAcceleration": 1.8,
+    "maxAngularVelocity": 45.0,
+    "maxAngularAcceleration": 75.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -179.99999999954522
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -90.0
+  },
+  "useDefaultConstraints": true
+}

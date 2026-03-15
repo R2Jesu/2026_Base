@@ -39,6 +39,18 @@
           "data": {
             "name": "intake"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "mid_col"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shoot"
+          }
         }
       ]
     }

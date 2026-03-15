@@ -8,43 +8,48 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.1974810240561524,
-        "y": 4.054124714952273
+        "x": 2.1486731348024275,
+        "y": 4.080965780279469
       },
       "isLocked": false,
       "linkedName": "E_hang_mid"
     },
     {
       "anchor": {
-        "x": 4.6743,
-        "y": 5.197024999999999
+        "x": 3.283649289099526,
+        "y": 7.323412322274882
       },
       "prevControl": {
-        "x": 4.065229909770734,
-        "y": 5.069805017836736
+        "x": 2.556295478826423,
+        "y": 7.08301136965533
       },
       "nextControl": {
-        "x": 5.259806418313773,
-        "y": 5.319323102122065
+        "x": 3.9302544160664814,
+        "y": 7.537124667348288
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.5937280701754375,
-        "y": 4.492478070175439
+        "x": 8.151789099520695,
+        "y": 7.140722748809792
       },
       "prevControl": {
-        "x": 7.910357307041535,
-        "y": 4.331024650774648
+        "x": 7.988945750998143,
+        "y": 6.9510334137327705
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "E_mid_col"
+      "linkedName": "E_go_balls"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.634103019538188,
+      "rotationDegrees": 0.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -58,7 +63,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -90.0
   },
   "reversed": false,
   "folder": null,
