@@ -92,7 +92,7 @@ public class Robot extends TimedRobot {
     //omegaRPS = Units.degreesToRotations(m_robotContainer.m_robotDrive.getTurnRate());
 
     // PHX6ex includes && Math.abs(omegaRps)<2.0 ... radians per second, not degrees
-    if (myLimelightPose != null && myLimelightPose.tagCount > 0 && myLimelightPose.avgTagDist < 6.0 && myLimelightPose.tagSpan > 0.1) {
+    if (myLimelightPose != null && myLimelightPose.tagCount > 0 && myLimelightPose.avgTagDist < 6.0 ) {
         m_robotContainer.m_robotDrive.setVisionMeasurementStdDevs(VecBuilder.fill(0.9, 0.9, 0.9));
         m_robotContainer.m_robotDrive.addVisionMeasurement(myLimelightPose.pose, myLimelightPose.timestampSeconds);
       }

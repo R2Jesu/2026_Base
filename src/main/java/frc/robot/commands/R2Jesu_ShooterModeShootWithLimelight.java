@@ -16,7 +16,7 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 
 import static edu.wpi.first.units.Units.*;
 
@@ -67,7 +67,7 @@ public class R2Jesu_ShooterModeShootWithLimelight extends Command {
   private int m_debounceLimit = 0;
   private double m_limeLightToAprilTagVerticalDistance = (Constants.kAprilTagHeight - Constants.kLimelightHeight);
   private double m_verticalAngleToAprilTag = 0;
-  private CommandXboxController m_joystick;
+  private CommandJoystick m_joystick;
 
   PIDController pid = new PIDController(.01, 0.00, 0.00);
 
@@ -81,7 +81,7 @@ public class R2Jesu_ShooterModeShootWithLimelight extends Command {
    * Required.
    */
   public R2Jesu_ShooterModeShootWithLimelight(R2Jesu_ShooterSubsystem shooterSubsystem, DriveSubsystem drivetrain,
-    CommandXboxController theJoystick) {
+    CommandJoystick theJoystick) {
     m_shooterSubsystem = shooterSubsystem;
     m_drivetrain = drivetrain;
     m_joystick = theJoystick;
@@ -124,8 +124,8 @@ public class R2Jesu_ShooterModeShootWithLimelight extends Command {
           m_distanceToAprilTag = m_limeLightToAprilTagVerticalDistance / Math.tan(Math.toRadians(m_verticalAngleToAprilTag));
         }
 
-        m_drivetrain.setControl(m_PIDAim.withVelocityX(yLimiter.calculate(-m_joystick.getRightY()))
-            .withVelocityY(xLimiter.calculate(-m_joystick.getRightX()))
+        m_drivetrain.setControl(m_PIDAim.withVelocityX(yLimiter.calculate(-m_joystick.getY()))
+            .withVelocityY(xLimiter.calculate(-m_joystick.getX()))
             .withRotationalRate(-pid.calculate(m_drivetrain.getState().RawHeading.getDegrees(), m_newAngleHeading) * (1.5 * Math.PI)));
         if (Math.abs(pid.getPositionError()) <= Constants.kTXTolerance) {
           if (m_debounceCounter >= m_debounceLimit) {

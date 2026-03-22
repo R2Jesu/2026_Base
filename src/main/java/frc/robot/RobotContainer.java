@@ -28,6 +28,7 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 // MEE according to Phoenix6 examples this is needed for  warning on pathplanner warmup
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -53,7 +54,7 @@ public class RobotContainer {
 
     private final Telemetry logger = new Telemetry(MaxSpeed);
 
-    private final CommandXboxController joystick = new CommandXboxController(0);
+    private final CommandJoystick joystick = new CommandJoystick(0);
 
     public final DriveSubsystem m_robotDrive = TunerConstants.createDrivetrain();
     public final R2Jesu_ShooterSubsystem m_shooterSubsystem = new R2Jesu_ShooterSubsystem();
@@ -92,10 +93,10 @@ public class RobotContainer {
         m_robotDrive.setDefaultCommand(
             // m_robotDrive will execute this command periodically
             m_robotDrive.applyRequest(() ->
-                drive.withVelocityX(yLimiter.calculate(-joystick.getRightY())) // Drive forward with negative Y (forward)
-                    .withVelocityY(xLimiter.calculate(-joystick.getRightX())) // Drive left with negative X (left)
+                drive.withVelocityX(yLimiter.calculate(-joystick.getY())) // Drive forward with negative Y (forward)
+                    .withVelocityY(xLimiter.calculate(-joystick.getX())) // Drive left with negative X (left)
                     //.withRotationalRate(rotLimiter.calculate(-joystick.getLeftX())) // Drive counterclockwise with negative X (left)
-                    .withRotationalRate(-joystick.getLeftX()) // Drive counterclockwise with negative X (left)
+                    .withRotationalRate(-joystick.getTwist()) // Drive counterclockwise with negative X (left)
             )
         );
 
@@ -120,12 +121,12 @@ public class RobotContainer {
         joystick.start().and(joystick.x()).whileTrue(m_robotDrive.sysIdQuasistatic(Direction.kReverse));
         */
         // MEE reset the field-centric heading on left bumper press, redefines what is forward TEST ME
-        joystick.leftBumper().onTrue(m_robotDrive.runOnce(() -> m_robotDrive.seedFieldCentric()));
+        //joystick.leftBumper().onTrue(m_robotDrive.runOnce(() -> m_robotDrive.seedFieldCentric()));
 
         m_robotDrive.registerTelemetry(logger::telemeterize);
 
         //R2JESU Driver Buttons and such
-        joystick.rightTrigger().whileTrue(new R2Jesu_ShooterModeShootWithLimelight(m_shooterSubsystem, m_robotDrive,
+        joystick.trigger().whileTrue(new R2Jesu_ShooterModeShootWithLimelight(m_shooterSubsystem, m_robotDrive,
             joystick));
 
         joystick.button(1).onTrue(
